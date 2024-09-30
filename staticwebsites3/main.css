@@ -1,0 +1,36 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    margin: 0;
+
+}
+header {
+    font-size: xx-large;
+    background-image: linear-gradient(to top, #2e0f50, #2a0f5e);
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.295);
+    padding: 10px 0;
+    color: white;
+}
+header > h1 {
+    margin-bottom: 0;
+}
+header > p {
+    margin-top: 0;
+}
+main {
+    padding: 20px;
+    margin: 10px;
+    width: 80%;
+    margin: auto;
+}
+footer {
+    background-image: linear-gradient(to top, #2e0f50, #2a0f5e);
+    color: white;
+    text-align: center;
+    padding-bottom: 50px;
+}
+footer > a {
+    color: white;
+}
