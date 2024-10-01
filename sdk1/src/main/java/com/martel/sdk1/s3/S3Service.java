@@ -3,6 +3,7 @@ package com.martel.sdk1.s3;
 import org.springframework.stereotype.Service;
 
 import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
@@ -70,6 +71,6 @@ public class S3Service {
             .bucket(bucket)
             .key(key)
             .build();
-        return s3Client.getObject(request).toString();
+        return s3Client.getObject(request, ResponseTransformer.toBytes()).asUtf8String();
     }
 }
