@@ -37,6 +37,7 @@ public class S3Service {
             System.err.println(e.awsErrorDetails().errorMessage());
         }
     }
+
     public String save(String data) {
         String key = "Key" + Long.toString(System.currentTimeMillis());
         s3Client.putObject(PutObjectRequest.builder()
@@ -46,6 +47,7 @@ public class S3Service {
             RequestBody.fromString(data));
         return data;
     }
+
     public void delete(String key) {
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
             .bucket(bucket)
@@ -53,6 +55,16 @@ public class S3Service {
             .build();
         s3Client.deleteObject(deleteObjectRequest);
     }
+
+    public String edit(String key, String data) {
+        s3Client.putObject(PutObjectRequest.builder()
+            .bucket(bucket)
+            .key(key)
+            .build(),
+            RequestBody.fromString(data));
+        return data;
+    }
+
     public String getObject(String key) {
         GetObjectRequest request = GetObjectRequest.builder()
             .bucket(bucket)
