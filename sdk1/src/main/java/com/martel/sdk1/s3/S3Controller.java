@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class S3Controller {
@@ -23,6 +25,11 @@ public class S3Controller {
         @PathVariable("key") String key
     ) {
         return ResponseEntity.ok(s3Service.getObject(key));
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<String>> getAllObjects() {
+        return ResponseEntity.ok(s3Service.getAllObjects());
     }
 
     @PostMapping("/upload")
