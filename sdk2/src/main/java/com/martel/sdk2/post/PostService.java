@@ -1,6 +1,7 @@
 package com.martel.sdk2.post;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,5 +58,13 @@ public class PostService {
             System.err.println(e.getMessage());
             return null;
         }
+    }
+
+    public List<Post> getAllPosts() {
+        return repository.findAll();
+    }
+
+    public Post getPost(String id) {
+        return repository.findById(id).get();
     }
 }
