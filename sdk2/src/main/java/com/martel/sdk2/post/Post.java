@@ -16,9 +16,10 @@ import lombok.Setter;
 public class Post {
     
     @Id
-    String id;
-    String url;
-    String sender;
-    Date createdAt;
+    private String id;
+    private String key;
+    private String url;
+    private String sender;
+    private Date createdAt;
 
 }

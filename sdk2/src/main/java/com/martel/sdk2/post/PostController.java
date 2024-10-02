@@ -3,6 +3,7 @@ package com.martel.sdk2.post;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +36,13 @@ public class PostController {
         @PathVariable("id") String id
     ) {
         return ResponseEntity.ok(service.getPost(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(
+        @PathVariable("id") String id
+    ) {
+        service.delete(id);
+        return ResponseEntity.accepted().build();
     }
 }

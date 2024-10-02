@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
@@ -46,8 +47,9 @@ public class PostService {
 
             //create post
             Post post = Post.builder()
-                .sender("martel")
+                .key(key)
                 .url(urlBase + key)
+                .sender("martel")
                 .createdAt(new Date())
                 .build();
 
@@ -66,5 +68,22 @@ public class PostService {
 
     public Post getPost(String id) {
         return repository.findById(id).get();
+    }
+
+    public void deleteObject(String key) {
+        DeleteObjectRequest request = DeleteObjectRequest.builder()
+            .bucket(bucket)
+            .key(key)
+            .build();
+        s3Client.deleteObject(request);
+    }
+
+    public void delete(String id) {
+
+        Post post = repository.findById(id).get();
+        String key = post.getKey();
+
+        delete(key);
+        repository.deleteById(id);
     }
 }
