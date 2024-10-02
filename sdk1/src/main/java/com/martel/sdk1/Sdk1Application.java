@@ -25,7 +25,6 @@ public class Sdk1Application {
 	public CommandLineRunner createBucket() {
 		return args -> {
 			s3Service.createBucket();
-			s3Service.save("First Test Object");
 		};
 	}
 

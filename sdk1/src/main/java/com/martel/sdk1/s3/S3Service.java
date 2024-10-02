@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class S3Service {
     
     private final S3Client s3Client;
-    private String bucket = "martelsdkbucket";
+    private String bucket = "martel-crud-v1";
 
     public S3Service() {
         s3Client = DependencyFactory.s3Client();
@@ -39,6 +39,7 @@ public class S3Service {
                     .bucket(bucket)
                     .build()
             );
+            save("First Test Object");
         } catch (S3Exception e) {
             System.err.println(e.awsErrorDetails().errorMessage());
         }
