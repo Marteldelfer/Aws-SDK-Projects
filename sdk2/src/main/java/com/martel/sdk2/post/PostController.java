@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +20,7 @@ public class PostController {
 
     private final PostService service;
 
-    @PostMapping("/upload")
+    @PostMapping("/")
     public ResponseEntity<Post> upload(
         @RequestBody MultipartFile image
     ) { 
@@ -44,5 +45,12 @@ public class PostController {
     ) {
         service.delete(id);
         return ResponseEntity.accepted().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Post> edit(
+        @PathVariable("id") String id,
+        @RequestBody MultipartFile image
+    ) {
+        return ResponseEntity.ok(service.edit(id, image));
     }
 }

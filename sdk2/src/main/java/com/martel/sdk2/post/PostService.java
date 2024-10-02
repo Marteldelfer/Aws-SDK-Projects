@@ -83,7 +83,31 @@ public class PostService {
         Post post = repository.findById(id).get();
         String key = post.getKey();
 
-        delete(key);
+        deleteObject(key);
         repository.deleteById(id);
+    }
+
+    public Post edit(
+        String id,
+        MultipartFile image
+
+    ) {
+        Post post = repository.findById(id).get();
+        String key = post.getKey();
+        
+        //first, delte s3 object
+        deleteObject(key);
+        //then, replace it
+        try {
+            RequestBody request = RequestBody.fromInputStream(
+                image.getInputStream(),
+                image.getSize()
+            );
+            save(request, key);
+            return post; 
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 }
