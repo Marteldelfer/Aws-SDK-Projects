@@ -15,20 +15,9 @@ public class PostController {
     private final PostService service;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> upload(
+    public ResponseEntity<Post> upload(
         @RequestBody MultipartFile image
-    ) { try {
-            software.amazon.awssdk.core.sync.RequestBody requestBody =
-            software.amazon.awssdk.core.sync.RequestBody.fromInputStream(
-                image.getInputStream(), image.getSize()
-                );
-            service.save(requestBody);
-
-            return ResponseEntity.ok("Saved");
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    ) { 
+        return service.upload(image);
     }
 }
